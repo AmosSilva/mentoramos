@@ -1,0 +1,51 @@
+{
+    "piny.project_settings": {
+        "open-pages": [
+            "pinyfakepage.html"
+        ],
+        "urls": {
+            "pinyfakepage.html": {
+                "open-page-views": [
+                    {
+                        "w": 414,
+                        "h": 736
+                    }
+                ]
+            }
+        },
+        "component-settings": {
+            "src/pages/index.astro:::Temp": {
+                "route": "/pagamentos e taxas"
+            }
+        },
+        "app-routes": {
+            "routes": [
+                "/",
+                "/api/enviar-form",
+                "/comofunciona",
+                "/landing-page",
+                "/pagamentos e taxas",
+                "/perguntas frequentes",
+                "/politica-de-cookies",
+                "/politica-de-privacidade",
+                "/sobre",
+                "/termos-de-uso"
+            ],
+            "current_route": "/"
+        },
+        "recent-classes": [
+            "s",
+            "n",
+            "i",
+            "l",
+            "3",
+            "-",
+            "r",
+            "o",
+            "t",
+            "c",
+            "e",
+            "v"
+        ]
+    }
+}

@@ -1,0 +1,63 @@
+---
+import FAQItem from "./FAQItem.astro";
+
+const faqData = [
+  {
+    question: "Quais são os diferenciais da Lucre+ ?",
+    answer:
+      "Nossas taxas são as menores do mercado. Nosso atendimento é individualizado e premium. Nossa taxa de aprovação de vendas é a maior do mercado. Nossas soluções são práticas e economizam tempo dos produtores e empresários do digital.",
+  },
+  {
+    question: "Quanto custa para vender pela Lucre+?",
+    answer:
+      "Para você vender na Lucre+ não cobramos nenhuma taxa de adesão ou mensalidade. Oferecemos taxas personalizadas para cada negócio que são cobradas somente quando houver vendas.",
+  },
+  {
+    question: "Quando posso solicitar o saque do meu dinheiro?",
+    answer:
+      "Em nossas parcerias temos a opção de recebimento em 2 dias úteis, 30 dias e de recebimento de uma parcela a cada mês. Negociamos o prazo de recebimento junto com as taxas para garantir uma maior lucratividade para você.",
+  },
+  {
+    question: "Quais são as bandeiras de cartão de crédito aceitas?",
+    answer:
+      "Aceitamos as bandeiras Visa, Mastercard, Elo, American Express, Hipercard, Diners, Discover, JCB, Credz e Cabal.",
+  },
+];
+---
+
+<section class="faq-section">
+  <div class="faq-header">
+    <h1>Perguntas frequentes</h1>
+    <p class="subtitle">
+      Caso não encontre algo aqui sinta-se à vontade para nos enviar um
+      WhatsApp.
+    </p>
+  </div>
+  <div class="faq-list">
+    {
+      faqData.map((item) => (
+        <FAQItem question={item.question} answer={item.answer} />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: max(4em, 6cqw) var(--space-xxl);
+    margin-top: clamp(6rem, 5cqw, 14rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .faq-header {
+    text-align: center;
+    margin-bottom: 3em;
+  }
+
+  .faq-list {
+    width: -webkit-fill-available;
+    padding: 0 clamp(1em, 8cqw, 10em);
+  }
+</style>

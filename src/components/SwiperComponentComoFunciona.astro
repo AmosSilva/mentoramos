@@ -1,0 +1,204 @@
+---
+import FeatureBlock from "../components/FeatureBlock.astro";
+---
+
+<div id="swiper-container">
+  <!-- Additional required wrapper -->
+  <div class="blocks-container">
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/taxas.svg"
+        title="As melhores taxas e prazos"
+      >
+        <div slot="description">
+          <p>
+            Temos as melhores taxas do mercado para recebimento em dois dias
+            úteis, trinta dias ou recebimento de uma parcela a cada mês.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/atendimento.svg"
+        title="Atendimento concierge"
+        linkText="Saiba mais"
+      >
+        <div slot="description">
+          <p>
+            Aqui você tem acesso direto a um gerente de contas para todo o
+            suporte, incluindo a configuração de suas páginas de pagamento e
+            integrações.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/checkout.svg"
+        title="Checkout personalizado"
+      >
+        <div slot="description">
+          <p>
+            Na Lucre + entregamos páginas de pagamento de alta conversão com a
+            identidade visual da sua empresa e de cada um dos produtos.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/integrações.svg"
+        title="Mais de 90 integrações"
+      >
+        <div slot="description">
+          <p>
+            Temos integrações com áreas de membros, dados de conversão, sistemas
+            de automação, emissão de notas fiscais e muitas outras.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/subscription.svg"
+        title="Venda de assinaturas"
+      >
+        <div slot="description">
+          <p>
+            Temos o modelo de cobrança por assinatura, também conhecido como
+            recorrência, para que as cobranças aconteçam automaticamente no
+            período desejado.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/coprodução.svg"
+        title="Sistema de coprodução"
+      >
+        <div slot="description">
+          <p>
+            Temos toda a estrutura necessária para que o valor de cada venda
+            seja dividida adequadamente entre os coprodutores de cada produto ou
+            serviço vendido.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/afiliados.svg"
+        title="Sistema de afiliados"
+      >
+        <div slot="description">
+          <p>
+            Temos toda a estrutura necessária para que o valor de cada venda por
+            afiliados seja devidamente dividida com o afiliado, mesmo em vendas
+            com coprodução.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/notifications.svg"
+        title="Notificações por WhatsApp"
+      >
+        <div slot="description">
+          <p>
+            A cada venda realizada, abandono de carrinho ou alteração de status
+            das vendas, receba uma mensagem por WhatsApp para não ficar por fora
+            de nada.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+<style>
+  #swiper-container.swiper {
+    width: 100%;
+  }
+  .blocks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+    gap: 1.4cqb;
+    margin: 0 auto;
+  }
+  .swiper-pagination {
+    margin-top: 2rem;
+    position: relative;
+  }
+
+  @media (max-width: 960px) {
+    .swiper-slide {
+      width: 40cqb;
+      height: -webkit-fill-available;
+    }
+    .swiper-wrapper {
+      display: flex;
+    }
+    .blocks-container {
+      gap: 0;
+    }
+  }
+</style>
+<script>
+  import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  let swiperInstance = null;
+  const swiperContainer = document.getElementById("swiper-container");
+  const blocksContainer = swiperContainer.querySelector(".blocks-container");
+  const slides = swiperContainer.querySelectorAll(".swiper-slide-placeholder");
+
+  function initializeSwiper() {
+    if (swiperInstance) return;
+
+    swiperContainer.classList.add("swiper");
+    blocksContainer.classList.add("swiper-wrapper");
+    slides.forEach((slide) => slide.classList.add("swiper-slide"));
+
+    swiperInstance = new Swiper(swiperContainer, {
+      modules: [Pagination],
+      direction: "horizontal",
+      loop: true,
+      slidesPerView: "auto",
+      spaceBetween: 12,
+      centeredSlides: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  }
+
+  function destroySwiper() {
+    if (!swiperInstance) return;
+    swiperInstance.destroy(true, true);
+    swiperInstance = null;
+    swiperContainer.classList.remove("swiper");
+    blocksContainer.classList.remove("swiper-wrapper");
+    slides.forEach((slide) => slide.classList.remove("swiper-slide"));
+  }
+
+  function handleResize() {
+    if (window.innerWidth <= 960) {
+      initializeSwiper();
+    } else {
+      destroySwiper();
+    }
+  }
+
+  // Run on load
+  document.addEventListener("DOMContentLoaded", handleResize);
+
+  // Run on resize
+  window.addEventListener("resize", handleResize);
+</script>

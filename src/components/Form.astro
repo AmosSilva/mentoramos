@@ -1,0 +1,570 @@
+---
+import ConfirmationScreen from "./Confirmation.astro";
+---
+
+<div id="form-modal" class="integrations-modal">
+  <!-- SEU HTML DO FORMULÁRIO AQUI (SEM ALTERAÇÕES) -->
+  <div class="integrations-modal-content">
+    <span class="integrations-modal-close">×</span>
+    <form id="multiStepForm">
+      <div class="section">
+        <h2>Dados Pessoais</h2>
+        <div class="form-group">
+          <label for="name">Nome:*</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-field"
+            placeholder="Seu nome completo"
+            required
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">E-mail:*</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-field"
+              placeholder="seuemail@exemplo.com"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp:*</label>
+            <input
+              type="text"
+              id="whatsapp"
+              name="whatsapp"
+              class="form-field"
+              placeholder="(XX) XXXXX-XXXX"
+              required
+              title="Por favor, insira um número de WhatsApp válido no formato (XX) XXXXX-XXXX"
+            />
+          </div>
+          <div class="form-group">
+            <label for="instagram">Instagram:</label>
+            <input
+              type="text"
+              id="instagram"
+              name="instagram"
+              class="form-field"
+              placeholder="@seuinstagram"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Informações da Empresa</h2>
+        <div class="form-group">
+          <label for="company">Empresa:*</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            class="form-field"
+            placeholder="Nome da sua empresa"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="role">Cargo ou função:*</label>
+          <input
+            type="text"
+            id="role"
+            name="role"
+            class="form-field"
+            placeholder="Seu cargo na empresa"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="revenue"
+            >Qual é o Faturamento anual da empresa em reais?*</label
+          >
+          <select id="revenue" name="revenue" class="form-field" required>
+            <option value="" disabled selected
+              >Selecione uma faixa de faturamento</option
+            >
+            <option value="até 1 Milhão">até 1 Milhão</option>
+            <option value="entre 1 Milhão e 2 Milhões"
+              >entre 1 Milhão e 2 Milhões</option
+            >
+            <option value="entre 2 Milhões e 10 Milhões"
+              >entre 2 Milhões e 10 Milhões</option
+            >
+            <option value="entre 10 Milhões e 30 Milhões"
+              >entre 10 Milhões e 30 Milhões</option
+            >
+            <option value="entre 30 Milhões e 50 Milhões"
+              >entre 30 Milhões e 50 Milhões</option
+            >
+            <option value="maior que 50 Milhões">maior que 50 Milhões</option>
+          </select>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Como podemos ajudar?</h2>
+        <div class="form-group">
+          <label for="help"
+            >Como você gostaria que a Lucre+ ajudasse o seu negócio?</label
+          >
+          <textarea
+            id="help"
+            name="help"
+            class="form-field"
+            placeholder="Descreva como podemos ajudar..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="priority"
+            >Qual o nível de prioridade que gostaria para o seu atendimento:*</label
+          >
+          <select id="priority" name="priority" class="form-field" required>
+            <option value="" disabled selected>Selecione a prioridade</option>
+            <option value="1 - em até uma semana">em até uma semana</option>
+            <option value="2 - até o fim do dia">até o fim do dia</option>
+            <option value="3 - até 4 horas">até 4 horas</option>
+            <option value="4 - nos próximos minutos"
+              >nos próximos minutos</option
+            >
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" id="prevBtn" class="secondary">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="arrow-icon"
+            ><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg
+          >
+        </button>
+        <div class="button-group">
+          <button type="button" id="nextBtn" class="primary">Próximo →</button>
+          <button type="submit" id="submitBtn" class="primary hidden"
+            >Enviar</button
+          >
+        </div>
+      </div>
+      <div class="dots-container">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <p
+        id="formMessage"
+        style="margin-top: 1rem; text-align: center; font-weight: bold;"
+      >
+      </p>
+    </form>
+  </div>
+</div>
+
+<ConfirmationScreen />
+
+<!-- SEU CSS AQUI (SEM ALTERAÇÕES) -->
+<style>
+  /* MANTÉM TODO O SEU CSS EXISTENTE SEM ALTERAÇÕES */
+  .hidden {
+    display: none;
+  }
+  form {
+    height: -webkit-fill-available;
+  }
+  h2 {
+    font-size: max(2em, 2.4cqw);
+    margin-bottom: var(--space-s);
+  }
+  .integrations-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2cqb);
+  }
+
+  .integrations-modal-content {
+    background-color: var(--color-background);
+    margin: 5% auto;
+    padding: var(--space-m);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+
+  .integrations-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 6cqb;
+    font-weight: 200;
+    line-height: 1;
+    position: absolute;
+    top: 2cqb;
+    right: 2.8cqb;
+  }
+
+  .integrations-modal-close:hover,
+  .integrations-modal-close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .section:not(:first-child) {
+    display: none;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .form-group {
+    margin-bottom: 2cqb;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 1cqb;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .form-field {
+    width: 100%;
+    padding: 2cqb;
+    border: var(--border);
+    border-radius: 1cqb;
+    background-color: var(--color-background-light);
+    color: var(--color-text);
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-normal);
+    transition: var(--transition-base);
+  }
+
+  .form-field:focus {
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 2px var(--color-blue);
+  }
+
+  .form-field::placeholder {
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  select.form-field {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23F5F5DC" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%;
+    background-size: 0.65em auto;
+    padding-right: 2.5em;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-s);
+  }
+
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-s);
+    gap: 2cqb;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot.active {
+    background-color: var(--color-button-primary-end);
+  }
+  #prevBtn.secondary {
+    background: none !important;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: fit-content;
+  }
+  .button-group {
+    margin-left: auto;
+  }
+  #nextBtn.primary,
+  #submitBtn.primary {
+    font-size: small;
+    padding: 0.6rem 1rem;
+  }
+
+  #prevBtn.secondary .arrow-icon {
+    stroke: white;
+  }
+  #prevBtn.secondary .arrow-icon:hover {
+    stroke: white;
+  }
+</style>
+
+<script is:inline>
+  // Esta função encapsula toda a lógica de inicialização do formulário
+  function setupMultiStepForm() {
+    // É CRUCIAL RE-SELECIONAR TODOS OS ELEMENTOS AQUI
+    // para garantir que você esteja interagindo com os elementos do DOM ATUAL
+    const whatsappInput = document.getElementById("whatsapp");
+    const modal = document.getElementById("form-modal");
+    const closeModal = document.querySelector(".integrations-modal-close");
+    const form = document.getElementById("multiStepForm");
+    const sections = document.querySelectorAll(".section");
+    const dots = document.querySelectorAll(".dot");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const formMessage = document.getElementById("formMessage");
+    const confirmationScreen = document.getElementById("confirmation-screen");
+    let currentSection = 0; // Reinicia a seção atual ao carregar a página
+
+    // Verifica se os elementos cruciais existem. Se o script estiver em um layout
+    // e o formulário não estiver em todas as páginas, isso previne erros.
+    if (
+      !whatsappInput ||
+      !modal ||
+      !closeModal ||
+      !form ||
+      !prevBtn ||
+      !nextBtn ||
+      !submitBtn ||
+      !formMessage
+    ) {
+      // console.warn("Um ou mais elementos do formulário não foram encontrados na página atual. Ignorando a inicialização do formulário.");
+      return;
+    }
+
+    // --- LÓGICA DE FORMATAÇÃO DO WHATSAPP ---
+    whatsappInput.addEventListener("input", (e) => {
+      let value = e.target.value.replace(/\D/g, "");
+      value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+      value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+      e.target.value = value;
+    });
+
+    // --- LÓGICA DO FORMULÁRIO MULTI-ETAPAS ---
+    function showSection(sectionIndex) {
+      sections.forEach((section, index) => {
+        section.style.display = index === sectionIndex ? "block" : "none";
+      });
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === sectionIndex);
+      });
+      prevBtn.style.display = sectionIndex === 0 ? "none" : "inline-block";
+
+      if (sectionIndex === sections.length - 1) {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      } else {
+        nextBtn.style.display = "inline-block";
+        submitBtn.style.display = "none";
+      }
+      formMessage.textContent = "";
+    }
+
+    // Inicializa a exibição da primeira seção
+    showSection(currentSection);
+
+    // --- EVENT LISTENERS PARA OS BOTÕES DE NAVEGAÇÃO DO FORMULÁRIO ---
+    prevBtn.addEventListener("click", () => {
+      if (currentSection > 0) {
+        currentSection--;
+        showSection(currentSection);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const currentSectionFields =
+        sections[currentSection].querySelectorAll("[required]");
+      let allFieldsValid = true;
+
+      // First, check all required fields in the current section
+      for (const field of currentSectionFields) {
+        if (!field.checkValidity()) {
+          allFieldsValid = false;
+          field.reportValidity();
+        }
+      }
+
+      // Then, perform custom WhatsApp validation if in the first section
+      if (whatsappInput && currentSection === 0) {
+        const formattedWhatsapp = whatsappInput.value;
+        console.log("WhatsApp value for validation:", formattedWhatsapp);
+        // Regex to match (XX) XXXXX-XXXX or (XX) XXXX-XXXX
+        const whatsappRegex = /^\(\d{2}\)\s\d{4,5}-\d{4}$/;
+
+        if (!whatsappRegex.test(formattedWhatsapp)) {
+          whatsappInput.setCustomValidity(
+            "Por favor, insira um número de WhatsApp válido no formato (XX) XXXXX-XXXX."
+          );
+          whatsappInput.reportValidity();
+          allFieldsValid = false; // Set to false if WhatsApp is invalid
+        } else {
+          whatsappInput.setCustomValidity(""); // Clear custom validity if valid
+        }
+      }
+
+      // Only proceed if all validations passed
+      if (allFieldsValid && currentSection < sections.length - 1) {
+        currentSection++;
+        showSection(currentSection);
+      }
+    });
+
+    // --- EVENT LISTENERS PARA FECHAR O MODAL ---
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+      form.reset();
+      currentSection = 0;
+      showSection(currentSection);
+      formMessage.textContent = "";
+      confirmationScreen.style.display = "none";
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+        form.reset();
+        currentSection = 0;
+        showSection(currentSection);
+        formMessage.textContent = "";
+        confirmationScreen.style.display = "none";
+      }
+    });
+
+    // --- LÓGICA DE ENVIO DO FORMULÁRIO ---
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      formMessage.textContent = "Enviando...";
+      formMessage.style.color = "#007bff";
+
+      const formData = new FormData(form);
+      const dataToSend = {};
+
+      dataToSend.whatsappLucreMais = "5512983010571";
+      dataToSend.nome = formData.get("name");
+      dataToSend.whatsapp = formData.get("whatsapp");
+      dataToSend.email = formData.get("email");
+      dataToSend.empresa = formData.get("company");
+      dataToSend.cargo = formData.get("role");
+      dataToSend.faturamentoAnual = formData.get("revenue");
+      dataToSend.instagram = formData.get("instagram");
+      dataToSend.ajuda = formData.get("help");
+      dataToSend.prioridade = formData.get("priority");
+
+      // Adição da verificação do campo 'site'
+      // O campo 'site' não está presente no HTML fornecido, então ele resultará em 'null'.
+      // Se você pretende ter um campo 'site', adicione um input com name="site" e id="site".
+      // Por enquanto, ele será undefined no objeto `dataToSend`.
+      dataToSend.site = formData.get("site");
+
+      try {
+        const response = await fetch("/api/submit-form", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          formMessage.textContent =
+            result.message || "Formulário enviado com sucesso!";
+          formMessage.style.color = "green";
+          form.reset();
+          currentSection = 0;
+          showSection(currentSection);
+          modal.style.display = "none"; // Fechar o modal do formulário
+          confirmationScreen.style.display = "flex"; // Exibir a tela de confirmação
+          const closeButton = document.getElementById(
+            "closeConfirmationButton"
+          );
+          if (closeButton) {
+            // Função para fechar o modal de confirmação
+            const handleCloseConfirmation = () => {
+              // Reutiliza a mesma lógica do seu listener atual do CustomEvent
+              modal.style.display = "none";
+              form.reset();
+              currentSection = 0;
+              showSection(currentSection);
+              formMessage.textContent = "";
+              confirmationScreen.style.display = "none";
+            };
+
+            // Remove listener anterior para evitar duplicatas (boa prática)
+            closeButton.removeEventListener("click", handleCloseConfirmation);
+            // Adiciona o listener
+            closeButton.addEventListener("click", handleCloseConfirmation);
+          } else {
+            console.warn(
+              "Botão 'closeConfirmationButton' não encontrado após mostrar a tela de confirmação."
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+        formMessage.textContent =
+          "Ocorreu um erro na conexão. Verifique sua internet e tente novamente.";
+        formMessage.style.color = "red";
+      }
+    });
+
+    // --- EVENT LISTENER PARA FECHAR O MODAL DE CONFIRMAÇÃO VIA BOTÃO ---
+    document.addEventListener("close-form-modal", () => {
+      modal.style.display = "none";
+      form.reset();
+      currentSection = 0;
+      showSection(currentSection);
+      formMessage.textContent = "";
+      confirmationScreen.style.display = "none";
+    });
+  }
+
+  // Anexa a função de inicialização ao evento 'astro:page-load'
+  // Este evento é disparado tanto na carga inicial da página quanto em navegações client-side (View Transitions)
+  document.addEventListener("astro:page-load", setupMultiStepForm);
+
+  // Opcional: Para ambientes onde 'astro:page-load' possa não cobrir 100% da primeira carga
+  // (ex: se View Transitions não estiverem ativas por algum motivo em um cenário específico),
+  // você pode manter o DOMContentLoaded, mas 'astro:page-load' geralmente é suficiente
+</script>

@@ -1,0 +1,136 @@
+---
+import TestimonialCard from "./TestimonialCard.astro";
+---
+
+<section class="testimonials-section">
+  <div class="testimonials-content">
+    <h2>O que nossos clientes dizem</h2>
+    <p class="subtitle">
+      Veja como a Lucre+ transformou os negócios de mentores, produtores e
+      empresários.
+    </p>
+  </div>
+  <div id="testimonials-swiper" class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <TestimonialCard
+          testimonial="Tínhamos muitos problemas com a aprovação das vendas, mas a Lucre + aumentou exponencialmente nossas taxas de aprovação e com isso nossa lucratividade."
+          clientName="Jeykson Kalyl"
+          clientJob="Mentor em Gestão de Milhas Aéreas"
+          avatar="/Jeykson kalyl.webp"
+        />
+      </div>
+      <div class="swiper-slide">
+        <TestimonialCard
+          testimonial="A redução de taxas sobre as vendas aumentaram nossa lucratividade e a praticidade para gerar novos links via WhatsApp"
+          clientName="Renan Pires"
+          clientJob="Mentor de Empresários de Alto Desempenho"
+          avatar="/Renan Pires.webp"
+        />
+      </div>
+      <div class="swiper-slide">
+        <TestimonialCard
+          testimonial="A redução de taxas aumentou a lucratividade do nosso negócio, mas o que me impressionou mais além disso foi o atendimento sempre próximo e disposto sem a nos atender da melhor forma."
+          clientName="Idma Socha"
+          clientJob="Nutricionista Gestacional"
+          avatar="/Idma Socha.webp"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Mousewheel } from "swiper/modules";
+  import "swiper/css";
+
+  let swiperInstance = null;
+
+  function initializeSwiper() {
+    if (swiperInstance) return;
+
+    const swiperContainer = document.getElementById("testimonials-swiper");
+    if (!swiperContainer) return;
+
+    swiperInstance = new Swiper(swiperContainer, {
+      modules: [Mousewheel],
+      direction: "vertical",
+      slidesPerView: 2.1,
+      mousewheel: true,
+      loop: true,
+    });
+  }
+
+  function destroySwiper() {
+    if (swiperInstance) {
+      swiperInstance.destroy(true, true);
+      swiperInstance = null;
+    }
+  }
+
+  function handleInitialization() {
+    // Ensure this runs only after the DOM is settled
+    requestAnimationFrame(() => {
+      initializeSwiper();
+    });
+  }
+
+  // Setup Swiper on new page load or when VSL content is visible
+  document.addEventListener("astro:page-load", handleInitialization);
+  document.addEventListener("vsl-content-visible", handleInitialization);
+
+  // Cleanup before swapping to a new page
+  document.addEventListener("astro:before-swap", destroySwiper);
+</script>
+
+<style>
+  /* Testimonials Section */
+  .testimonials-section {
+    background-color: var(--color-background-light);
+    display: flex;
+    flex-direction: column;
+    gap: 4cqw;
+    color: var(--color-button-text);
+    text-align: center;
+  }
+  .testimonials-content {
+    text-align: left;
+  }
+  .testimonials-content h2 {
+    font-size: max(2.2em, 3.4cqw);
+    margin-bottom: 1.5cqb;
+    font-weight: var(--font-weight-bold);
+    font-family: "Montserrat", sans-serif;
+  }
+  #testimonials-swiper {
+    width: 100%;
+    max-height: 34rem;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    ); /* Efeito de aparecimento/desaparecimento */
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Desktop layout for testimonials (a partir de 960px) */
+  @media (min-width: 960px) {
+    .testimonials-section {
+      flex-direction: row-reverse; /* Slider on the left, text on the right */
+      justify-content: space-between;
+      align-items: center; /* Align items vertically in the center */
+      text-align: left;
+    }
+    #testimonials-swiper {
+      max-height: 50cqw;
+    }
+  }
+</style>

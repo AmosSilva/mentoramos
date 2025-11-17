@@ -1,0 +1,418 @@
+---
+import { Image } from "astro:assets";
+import LucreLogoNormal from "../../public/logos/lucre+ logo normal.svg";
+import LucreLogoPequeno from "../../public/logos/lucre+ logo pequeno.svg";
+---
+
+<header
+  data-normal-logo-src={LucreLogoNormal.src}
+  data-scrolled-logo-src={LucreLogoPequeno.src}
+>
+  <nav>
+    <a href="/" class="site-logo">
+      <Image src={LucreLogoNormal} alt="Lucre+ Logo" />
+    </a>
+    <button class="hamburger-menu" aria-label="Abrir menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="mobile-menu-container">
+      <a href="/" class="mobile-logo">
+        <Image
+          src={LucreLogoNormal}
+          alt="Lucre+ Logo"
+          width={150}
+          height={50}
+        />
+      </a>
+      <ul class="main-nav-links">
+        <li><a href="/">Lucre Mais</a></li>
+        <li><a href="/comofunciona">Como funciona</a></li>
+        <li><a href="/pagamentos-e-taxas">Meios de pagamento</a></li>
+        <li><a href="/sobre">Quem somos</a></li>
+        <li><a href="/perguntas-frequentes">Perguntas frequentes</a></li>
+      </ul>
+      <div class="mobile-social-icons">
+        <a href="#" aria-label="Facebook">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.248-1.333 1.134-1.333h2.866v-5h-3.472c-4.045 0-5.528 3.097-5.528 4.667v2.333z"
+            ></path>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.148 3.228-1.667 4.771-4.919 4.919-.058.028-1.265.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.228 1.667-4.771 4.919-4.919.058-.028 1.265-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.668.072 4.947c.2 4.358 2.618 6.78 6.98 6.98.059.028 1.281.073 4.948.073s3.668-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.668-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-.06-.028-1.281-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+            ></path>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.381 1.11-2.5 2.48-2.5s2.48 1.119 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-10.04-3.714v-2.155z"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function initializeHeaderInteractions() {
+    const hamburgerButton = document.querySelector(".hamburger-menu");
+    const mobileMenuContainer = document.querySelector(
+      ".mobile-menu-container"
+    );
+    const navLinks = document.querySelectorAll(".main-nav-links li a");
+    const header = document.querySelector("header");
+    const logoImg = document.querySelector(
+      ".site-logo img"
+    ) as HTMLImageElement;
+    function isDesktop() {
+      return window.matchMedia("(min-width: 961px)").matches;
+    }
+
+    function setActiveLink() {
+      const currentPath = decodeURIComponent(window.location.pathname);
+      const normalizedCurrentPath = currentPath.endsWith('/') && currentPath.length > 1 ? currentPath.slice(0, -1) : currentPath;
+
+      navLinks.forEach((link) => {
+        const linkHref = link.getAttribute("href");
+        const normalizedLinkHref = linkHref.endsWith('/') && linkHref.length > 1 ? linkHref.slice(0, -1) : linkHref;
+
+        if (normalizedLinkHref === normalizedCurrentPath) {
+          link.classList.add("active-link");
+        } else {
+          link.classList.remove("active-link");
+        }
+      });
+    }
+
+    function handleHamburgerClick() {
+      if (mobileMenuContainer && hamburgerButton) {
+        mobileMenuContainer.classList.toggle("is-active");
+        hamburgerButton.classList.toggle("is-active");
+        if (mobileMenuContainer.classList.contains("is-active")) {
+          navLinks.forEach((link, index) => {
+            if (link instanceof HTMLElement) {
+              link.style.animationDelay = `${0.1 * index + 0.3}s`;
+              link.classList.add("fade-in");
+            }
+          });
+        } else {
+          navLinks.forEach((link) => {
+            link.classList.remove("fade-in");
+          });
+        }
+      }
+    }
+
+    function handleNavLinkClick() {
+      if (mobileMenuContainer && hamburgerButton) {
+        mobileMenuContainer.classList.remove("is-active");
+        hamburgerButton.classList.remove("is-active");
+        navLinks.forEach((link) => {
+          link.classList.remove("fade-in");
+        });
+      }
+    }
+
+    function handleScroll() {
+      if (header && logoImg) {
+        const normalLogoSrc = header.dataset.normalLogoSrc;
+        const scrolledLogoSrc = header.dataset.scrolledLogoSrc;
+
+        if (!normalLogoSrc || !scrolledLogoSrc) {
+          console.error("Atributos data-logo não encontrados no cabeçalho.");
+          return;
+        }
+
+        if (window.scrollY > 0) {
+          header.classList.add("scrolled");
+          if (isDesktop()) {
+            logoImg.src = scrolledLogoSrc;
+          } else {
+            logoImg.src = normalLogoSrc;
+          }
+        } else {
+          header.classList.remove("scrolled");
+          logoImg.src = normalLogoSrc;
+        }
+      }
+    }
+
+    // Cleanup previous event listeners to avoid duplicates
+    hamburgerButton?.removeEventListener("click", handleHamburgerClick);
+    navLinks.forEach((link) =>
+      link.removeEventListener("click", handleNavLinkClick)
+    );
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", handleScroll);
+
+    // Add new event listeners
+    hamburgerButton?.addEventListener("click", handleHamburgerClick);
+    navLinks.forEach((link) => {
+      link.addEventListener("click", handleNavLinkClick);
+    });
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+
+    // Initial setup
+    handleScroll();
+    setActiveLink();
+  }
+
+  // Run on initial load and after Astro's page swaps
+  document.addEventListener("DOMContentLoaded", initializeHeaderInteractions);
+  document.addEventListener("astro:after-swap", initializeHeaderInteractions);
+</script>
+
+<style>
+  header {
+    background-color: hsla(228, 12%, 8%, 0);
+    color: #f8f3e7;
+    position: fixed;
+    top: 2cqw;
+    width: 99cqw;
+    padding: 0.6cqw var(--space-xxl);
+    justify-self: anchor-center;
+    border: 1px solid hsl(227, 12%, 14%, 0);
+    border-radius: 100em;
+    transition:
+      all 0.3s ease-in-out,
+      padding 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  header.scrolled {
+    background-color: hsla(228, 12%, 8%, 0.85);
+    border: 1px solid hsl(227, 12%, 14%);
+    box-shadow: 0px 4px 10cqw rgba(0, 0, 0, 1);
+    backdrop-filter: blur(0.3em);
+    width: 82cqw;
+    padding: max(0.8em, 2cqh) max(1.4em, 2cqw);
+  }
+
+  header.scrolled nav {
+    height: -webkit-fill-available;
+    width: auto;
+    height: 3cqw;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    height: 4cqw;
+  }
+
+  nav a {
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem; /* Espaço para a setinha futura */
+  }
+
+  /* Remover setinha dos links do menu */
+  a::after {
+    content: none;
+  }
+
+  .site-logo {
+    height: inherit;
+  }
+
+  .site-logo img {
+    height: -webkit-fill-available;
+    width: auto;
+  }
+
+  .hamburger-menu {
+    display: none; /* Esconder no desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001; /* Acima do menu */
+  }
+
+  .hamburger-menu .bar {
+    width: 2rem;
+    height: 0.25rem;
+    background-color: #f8f3e7;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+  }
+
+  .hamburger-menu.is-active .bar:nth-child(1) {
+    transform: rotate(45deg);
+  }
+
+  .hamburger-menu.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.is-active .bar:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  .mobile-menu-container {
+    /* Removido display: none; para que os links principais fiquem visíveis no desktop */
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    opacity: 1;
+    transform: translateX(0);
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 1000;
+    transition: none;
+  }
+
+  .main-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row; /* Links lado a lado no desktop */
+    gap: 2.2cqw;
+    text-align: center;
+  }
+
+  .main-nav-links li a {
+    color: #f8f3e7;
+    text-transform: none;
+    font-size: max(0.8rem, 1.1cqw);
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+  }
+
+  .main-nav-links li a:hover,
+  .main-nav-links li a.active-link {
+    color: var(--color-button-primary-end);
+  }
+
+  /* Esconde o logo e os ícones mobile por padrão */
+  a.mobile-logo,
+  .mobile-social-icons {
+    display: none;
+  }
+
+  /* Mobile: max-width 960px */
+  @media (max-width: 960px) {
+    header {
+      top: 2rem;
+      border-radius: 0;
+    }
+    header.scrolled {
+      top: 0;
+      width: 100%;
+    }
+    nav {
+      height: 3.3rem;
+    }
+    header.scrolled nav {
+      height: -webkit-fill-available;
+      width: auto;
+      height: auto;
+    }
+    .hamburger-menu {
+      display: flex; /* Mostrar no mobile */
+    }
+
+    .mobile-menu-container {
+      position: fixed;
+      gap: 3cqb;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #1f2229;
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateX(100%);
+      transition:
+        opacity 0.2s ease-out,
+        transform 0.2s ease-out;
+      padding: 3cqb;
+    }
+
+    .mobile-menu-container.is-active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main-nav-links {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .main-nav-links li a {
+      font-size: max(1.8rem, 2cqw);
+      font-weight: 220;
+    }
+
+    .mobile-menu-container.is-active .main-nav-links li a.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mostra o logo e os ícones apenas no menu mobile ativo */
+    .mobile-menu-container.is-active a.mobile-logo {
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-menu-container.is-active .mobile-social-icons {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .mobile-social-icons a {
+      color: #f8f3e7;
+    }
+    .mobile-social-icons svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  /* Desktop: min-width 961px */
+  @media (min-width: 961px) {
+    .mobile-menu-container {
+      display: flex !important; /* Garante que o container do menu principal esteja visível no desktop */
+    }
+
+    a.mobile-logo {
+      display: none !important; /* Garante que o mobile-logo esteja oculto no desktop */
+    }
+
+    .mobile-social-icons {
+      display: none !important; /* Garante que os ícones sociais mobile estejam ocultos no desktop */
+      /* Garante que o mobile-logo esteja oculto em telas maiores que 960px (desktop) */
+      .mobile-menu-container a.mobile-logo {
+        display: none !important;
+      }
+    }
+  }
+</style>

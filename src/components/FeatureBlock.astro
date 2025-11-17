@@ -1,0 +1,139 @@
+---
+interface Props {
+  iconPath: string /* Caminho para o ícone */;
+  title: string;
+  linkHref?: string /* Tornar opcional */;
+  linkText?: string /* Tornar opcional */;
+  variant?: "light" | "dark" /* Nova prop para o background */;
+  centered?: boolean /* Nova prop para centralizar o conteúdo */;
+  bigIcon?: boolean;
+}
+
+const { iconPath, title, linkHref, linkText, variant, centered, bigIcon } =
+  Astro.props;
+---
+
+<div
+  class:list={[
+    "feature-block",
+    { "feature-block--light": variant === "light" },
+    { "feature-block--centered": centered },
+  ]}
+>
+  <div class:list={["feature-icon", { "feature-icon--big": bigIcon }]}>
+    <img src={iconPath} alt={`Ícone de ${title}`} />
+  </div>
+  <h3>{title}</h3>
+  <slot name="description" />
+  {linkHref && linkText && <a href={linkHref}>{linkText}</a>}
+</div>
+
+<style>
+  .feature-block {
+    position: relative; /* Necessário para o pseudo-elemento */
+    background-color: var(--color-background-light); /* Usando a nova variável */
+    border: var(--border);
+    border-radius: clamp(1rem, 1.5cqw, 8rem);
+    padding: var(--space-s);
+    text-align: left; /* Alinhado à esquerda */
+    color: var(--color-button-text);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinhado à esquerda */
+    gap: 0.4cqw;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    overflow: hidden; /* Para garantir que a borda não vaze */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: -webkit-fill-available;
+    min-height: 100%;
+  }
+
+  .feature-block::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: clamp(1rem, 1.5cqw, 8rem); /* Ajustado para FeatureBlock */
+    padding: 0.1cqw; /* Espessura da borda */
+    background: linear-gradient(
+      45deg,
+      hsl(40, 59%, 27%) 0%,
+      hsl(40deg 36.12% 41.23%) 40%,
+      hsl(40deg 36.45% 52.49%) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0; /* Escondido por padrão */
+    transition: opacity 0.3s ease;
+    z-index: -1; /* Atrás do conteúdo do card */
+  }
+
+  .feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 1cqw;
+  }
+
+  .feature-icon img {
+    max-width: clamp(2rem, 5cqb, 5rem);
+  }
+
+  .feature-icon--big {
+    width: 100%;
+    height: 12cqw;
+  }
+
+  .feature-icon--big img {
+    max-width: 8cqw;
+  }
+
+  .feature-block h3 {
+    font-size: clamp(1em, 2vw,4rem);
+    margin-bottom: 0.5cqw;
+    color: hsla(38, 70%, 95%, 1);
+  }
+
+  /* Efeitos de Hover */
+  .feature-block:hover {
+    transform: translateY(-0.1px);
+    box-shadow:
+      0 0 2cqw hsla(51, 100%, 50%, 0.1),
+      0 0 2cqw hsla(51, 100%, 50%, 0.1),
+      0 0.1cqw 0.5cqw hsl(0, 0%, 0%, 0.5),
+      inset 0 0 0.02cqw 0.1cqw hsla(51, 100%, 50%, 0.5);
+  }
+
+  .feature-block:hover::before {
+    opacity: 1;
+  }
+
+  .feature-block--light {
+    background-color: var(--color-background); /* Cor de fundo mais clara */
+  }
+
+  .feature-block--centered {
+    text-align: center;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .feature-block {
+      gap: clamp(0.1rem, 3cqi, 1rem);
+    }
+    .feature-block h3 {
+      font-size: clamp(1.3em, 5cqi, 2rem);
+    }
+  }
+</style>

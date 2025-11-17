@@ -1,0 +1,337 @@
+---
+// import statements remain the same
+import { Image } from "astro:assets";
+import LandingPageLayout from "../layouts/LandingPageLayout.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import StandardCallToAction from "../components/StandardCallToAction.astro";
+import FounderSection from "../components/FounderSection.astro";
+import FAQSection from "../components/FAQSection.astro";
+import HighlightSection from "../components/HighlightSection.astro";
+import ForYou from "../components/ForYou.astro";
+import IntegrationsSection from "../components/IntegrationsSection.astro";
+import LucreLogoNormal from "../../public/logos/lucre+ logo normal.svg";
+import Swiper1 from "../components/SwiperComponentLanding1.astro";
+import Swiper2 from "../components/SwiperComponentLanding2.astro";
+import taxas from "../../public/taxas.webp";
+import aprovação from "../../public/aprovação.webp";
+import integrações from "../../public/integrações.webp";
+import coprodução from "../../public/coprodução.webp";
+import destaque from "../../public/destaque.webp";
+import ofertas from "../../public/ofertas.webp";
+import FormLanding from "../components/FormLanding.astro";
+---
+
+<LandingPageLayout title="Lucre+ Landing Page">
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Lucre+ Landing Page",
+      "url": "https://lucre.com/landing-page",
+      "description": "Descubra como você pode reduzir as taxas sobre as vendas e aumentar seus lucros com a Lucre+."
+    }
+  </script>
+  <Fragment slot="header"></Fragment>
+  <Fragment slot="footer"></Fragment>
+  <main>
+    <section class="landing-logo-section">
+      <Image
+        src={LucreLogoNormal}
+        alt="Lucre+ Logo"
+        width={150}
+        height={50}
+        class="landing-logo"
+      />
+    </section>
+    <section class="landing-hero-section">
+      <h1>Descubra como você pode reduzir as taxas sobre as vendas</h1>
+      <!-- VIDEO PLACEHOLDER REMOVED -->
+    </section>
+    <!-- VSL CONTENT IS NOW VISIBLE BY DEFAULT -->
+    <div id="vsl-content"> 
+      <div class="button">
+        <button class="primary">Quero Aumentar Meus Lucros Agora!</button>
+      </div>
+      <section class="landing-feature-blocks-section">
+        <Swiper1 />
+      </section>
+      <section class="needs-section">
+        <div class="needs-content-left">
+          <h1>O que você precisa para vender mais?</h1>
+          <p>
+            Temos todas as funcionalidades que você precisa para vender mais,
+            com maior praticidade e maior lucratividade.
+          </p>
+          <button class="primary">Lucre agora</button>
+        </div>
+        <div class="landing-feature-blocks-section needs-content-right">
+          <Swiper2 />
+        </div>
+      </section>
+      <section id="highlight-section" style="padding: 0;">
+        <HighlightSection
+          mainTitle="Temos os melhores benefícios para o seu negócio"
+          highlightItems={[
+            {
+              title: "As melhores taxas e prazos",
+              description:
+                "Temos as melhores taxas do mercado para recebimento em dois dias úteis, trinta dias ou recebimento de uma parcela a cada mês.",
+              imageSrc: taxas,
+            },
+            {
+              title: "Aprovação de vendas maior que 98%",
+              description:
+                "Garantimos altas taxas de aprovação sobre as vendas com cartão de crédito, impedindo o bloqueio indevido de vendas e redução de conversão.",
+              imageSrc: aprovação,
+            },
+            {
+              title: "Criação de ofertas por WhatsApp",
+              description:
+                "Quer mais agilidade para vender? Na Lucre + você consegue gerar ofertas com novos preços conversando pelo WhatsApp com nossa IA de atendimento. Rápido, prático e eficiente para quem vende com processo comercial estruturado.",
+              imageSrc: ofertas,
+            },
+            {
+              title: "Venda de assinaturas",
+              description:
+                "Você pode escolher o período de recorrência que melhor se adapta ao seu negócio.",
+              imageSrc: destaque,
+            },
+            {
+              title: "Mais de 90 integrações",
+              description:
+                "Temos integrações com áreas de membros, pixels de conversão, recuperação de vendas, sistemas de automação, emissão de notas fiscais e muitas outras.",
+              imageSrc: integrações,
+            },
+            {
+              title: "Sistema de coprodução",
+              description:
+                "Temos toda a estrutura necessária para que o valor de cada venda seja dividida adequadamente entre os coprodutores de cada produto ou serviço vendido.",
+              imageSrc: coprodução,
+            },
+          ]}
+        />
+      </section>
+
+      <IntegrationsSection openInNewTab={true} />
+
+      <TestimonialsSection />
+
+      <ForYou />
+
+      <StandardCallToAction
+        title="Pronto para maximizar seus lucros?"
+        paragraph="Temos as melhores soluções para suas vendas via cartão de crédito."
+        buttonText="quero Lucrar mais agora"
+        showParagraph={true}
+      />
+
+      <FounderSection
+        title="Nosso Fundador"
+        description="Amós Silva é Engenheiro Aeronáutico formado pelo Instituto Tecnológico de Aeronáutica (ITA), mestre em Engenharia pelo mesmo instituto e também professor no ITA.<br/><br/>Após anos de experiência no mercado digital, na liderança de um curso online pré-vestibular que aprova alunos em vestibulares altamente concorridos como ITA, IME e USP, Amós identificou um grande desafio enfrentado por Mentores,Educadores e Empreendedores Digitais: <strong>as altas taxas cobradas pelas plataformas de pagamento tradicionais.</strong><br/><br/>Foi a partir dessa dor que surgiu a <strong>Lucre+</strong>, uma solução criada para ajudar esses profissionais a maximizarem seus lucros e terem mais autonomia sobre seus negócios no digital.<br/><br/><h4>“Solucionar problemas é melhorar vidas e transformar o nosso país”<br/><br/>Amós Silva</h4>"
+        imagePath="/amos.png"
+      />
+
+      <FAQSection />
+
+      <footer class="landing-footer">
+        <p>Informações importantes</p>
+      </footer>
+      <FormLanding />
+    </div>
+  </main>
+</LandingPageLayout>
+
+<style is:global>
+  /* Existing styles remain the same, except potentially the video-related ones
+     which could be removed for cleanliness, but aren't strictly necessary */
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+  main {
+    overflow: clip;
+  }
+  .landing-logo-section {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-l);
+    background-color: var(--color-background);
+  }
+
+  .landing-hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 var(--space-xxl) 8cqb;
+    gap: var(--space-l);
+  }
+
+  .landing-hero-section h1 {
+    font-size: max(2.5em, 4cqw);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  /* .video-placeholder styles removed */
+
+  /* .unmute-overlay styles removed */
+
+  /* .video-placeholder video styles removed */
+
+  .button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-l);
+  }
+  .button button.primary {
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
+    padding: var(--space-s) var(--space-m);
+    font-size: var(--space-s);
+    border-radius: 1.4cqb;
+    cursor: pointer;
+  }
+
+  .landing-feature-blocks-section {
+    padding: var(--space-xxl);
+  }
+  .needs-section {
+    display: flex;
+    gap: var(--space-m);
+    padding: var(--space-xxl);
+    background-color: hsla(228, 12%, 10%, 1);
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .needs-content-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    max-width: 50cqw;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    justify-content: center;
+  }
+  .needs-content-right {
+    max-width: 50vw;
+    padding: 0;
+  }
+  .needs-content-left h1 {
+    font-size: max(2.5em, 4cqw);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+  .needs-content-left p {
+    font-size: max(1.1em, 1.5cqw);
+    color: var(--color-text);
+    line-height: var(--line-height-base);
+  }
+  .landing-footer {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    text-align: center;
+    padding: var(--space-l);
+    border-top: 1px solid var(--color-background);
+  }
+  @media (max-width: 960px) {
+    .landing-feature-blocks-section {
+      padding: 8cqb 0;
+    }
+    .needs-section {
+      flex-direction: column;
+      padding: 0cqb;
+    }
+    .needs-content-left {
+      position: static;
+      height: auto;
+      max-width: 100%;
+      padding: 8cqb var(--space-xxl);
+    }
+    .needs-content-right {
+      max-width: 100vw;
+      padding: 0 0 8cqb 0;
+    }
+    /* .video-placeholder media query styles removed */
+    .button button.primary {
+      font-size: clamp(1rem, 3cqi, 1.2rem);
+      width: 80cqw;
+    }
+  }
+  /* .video-placeholder.controls-active styles removed */
+  /* .video-controls styles removed */
+  /* .video-controls button styles removed */
+  /* .progress-bar styles removed */
+  /* .progress styles removed */
+</style>
+
+<!-- Simplified Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Since the video is removed, we consider the content as "immediately shown"
+    // and trigger the initialization logic that would normally happen after the video.
+
+    // Function to initialize modals and potentially other components
+    function initializeContent() {
+      const vslContent = document.getElementById("vsl-content");
+      if (!vslContent) return;
+
+      // --- Modal Handling ---
+      function handleButtonClick(e) {
+        e.preventDefault();
+        const formModal = document.getElementById("form-modal");
+        if (!formModal) return;
+        formModal.style.display = "flex";
+
+        // Ensure modal close listeners are attached only once
+        if (!formModal.dataset.modalInit) {
+          formModal.addEventListener("click", function (ev) {
+            if (ev.target === formModal) formModal.style.display = "none";
+          });
+          window.addEventListener("keydown", function (ev) {
+            if (ev.key === "Escape") formModal.style.display = "none";
+          });
+          formModal.dataset.modalInit = "true";
+        }
+      }
+
+      // Attach event listeners to primary buttons within the content
+      const buttons = vslContent.querySelectorAll("button.primary");
+      buttons.forEach(function (btn) {
+        if (btn.closest("form")) {
+          return;
+        }
+        if (!btn.dataset.primaryInit) {
+          // Prevent duplicate listeners
+          btn.addEventListener("click", handleButtonClick);
+          btn.dataset.primaryInit = "true";
+        }
+      });
+      // --- End Modal Handling ---
+
+      // --- Notify other components (like Testimonials) ---
+      // Dispatch the same event that the original script used
+      const event = new CustomEvent("vsl-content-visible");
+      document.dispatchEvent(event);
+
+      // If there's a global initializer for testimonials/carousels, call it
+      // This maintains compatibility with existing component logic
+      try {
+        if (typeof window.initTestimonials === "function") {
+          window.initTestimonials();
+        }
+      } catch (err) {
+        console.warn("initTestimonials threw:", err);
+      }
+      // --- End Notification ---
+    }
+
+    // Run initialization immediately since content is visible
+    initializeContent();
+  });
+</script>

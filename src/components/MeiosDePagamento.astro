@@ -1,0 +1,63 @@
+---
+import FeatureBlock from "./FeatureBlock.astro";
+---
+
+<section class="meios-de-pagamento">
+  <div class="container">
+    <h1 class="title">Ofereça as melhores formas de pagamento para seus clientes</h1>
+    <div class="feature-blocks">
+      <FeatureBlock
+        iconPath="/icons/cartão.svg"
+        title="Cartão de Crédito"
+        centered={true}
+        bigIcon={true}
+      >
+        <p slot="description">
+          Ofereça a experiência de vendas únicas ou assinaturas com período de
+          cobranças personalizados. Aceitamos todos os cartões de crédito.
+        </p>
+      </FeatureBlock>
+      <FeatureBlock iconPath="/icons/pix.svg" title="PIX" centered={true} bigIcon={true}>
+        <p slot="description">
+          Ofereça pagamentos a opção de pagamento via PIX. Opção de pagamento
+          disponível somente para vendas únicas.
+        </p>
+      </FeatureBlock>
+      <FeatureBlock iconPath="/icons/boleto.svg" title="Boleto" centered={true} bigIcon={true}>
+        <p slot="description">
+          Ofereça pagamentos a opção de pagamento por Boleto. Opção de pagamento
+          disponível somente para vendas únicas.
+        </p>
+      </FeatureBlock>
+    </div>
+  </div>
+</section>
+
+<style>
+  h1.title {
+    font-size: max(1.8em, 4cqw);
+  }
+  .meios-de-pagamento {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+  }
+
+  .meios-de-pagamento h2 {
+    font-size: max(2.5em, 4cqw);
+  }
+
+  .feature-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20cqw, 1fr));
+    gap: 2cqw;
+    justify-items: center;
+    margin: var(--space-xl) auto 0 ;
+    max-width: 80vw;
+  }
+
+  @media (max-width: 960px) {
+    .feature-blocks {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

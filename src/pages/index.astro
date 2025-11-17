@@ -1,0 +1,259 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CallToAction from "../components/CallToAction.astro";
+import StandardCallToAction from "../components/StandardCallToAction.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import IntegrationsSection from "../components/IntegrationsSection.astro";
+import Swiper from "../components/SwiperComponent.astro";
+---
+
+<BaseLayout
+  title="Lucre+"
+  description="A Lucre+ é a plataforma de pagamentos premium para mentores, produtores e empresários digitais que buscam escalar seus negócios com taxas justas, tecnologia de ponta e um ecossistema completo."
+>
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://lucre.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://lucre.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+  <main>
+    <HeroSection
+      h1Text="Pronto para maximizar seus lucros?"
+      pText="Somos a plataforma de pagamentos premium que ajuda mentores, produtores e empresários do digital a lucrarem mais por pagarem menos taxas."
+      backgroundImage="'/heroimage.webp'"
+      showButtons={true}
+      primaryButtonText="Lucre mais agora"
+      secondaryButtonText="Saiba mais sobre nós"
+    />
+    <section class="clientes-section">
+      <div class="client-logos-container">
+        <img src="/logos/logo01.webp" alt="Logo Cliente 1" />
+        <img src="/logos/logo02.webp" alt="Logo Cliente 2" />
+        <img src="/logos/logo03.webp" alt="Logo Cliente 3" />
+        <img src="/logos/logo04.webp" alt="Logo Cliente 4" />
+        <img src="/logos/logo05.webp" alt="Logo Cliente 5" />
+      </div>
+    </section>
+    <section class="swiper-feature-blocks-section">
+      <Swiper />
+      <img
+        src="/vectors/Vector3.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-3"
+      />
+      <img
+        src="/vectors/Vector4.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-4"
+      />
+    </section>
+    <section class="p0">
+      <img
+        src="/vectors/Vector1.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-1--2"
+      />
+      <ServicesSection
+        mainTitle="Nossos diferenciais"
+        mainParagraph="Nossas soluções são criadas com base nas dores reais dos nossos clientes, estamos sempre dispostos a te ouvir para te atender da melhor forma sempre."
+        buttonText="Lucre mais agora"
+        serviceBlocks={[
+          {
+            class: "service-block-1",
+            title: "Atendimento concierge",
+            description:
+              "Aqui você terá acesso direto a um gerente de contas que dará todo o suporte para a sua operação, incluindo a configuração de suas páginas de pagamento, instalação de pixels, integração com áreas de membros e muito mais.",
+            linkText: "Saiba mais",
+            linkHref: "/comofunciona",
+          },
+          {
+            class: "service-block-2",
+            title: "Menores taxas do mercado",
+            description:
+              "Já está cansado vender por plataformas que cobram muito e entregam pouco? Aqui você encontra as melhores taxas do mercado junto com atendimento e entregas de altíssimo nível.",
+            linkText: "Saiba mais",
+            linkHref: "/comofunciona",
+          },
+          {
+            class: "service-block-3",
+            title: "Aprovações acima de 98%",
+            description:
+              "Garantimos altas taxas de aprovação sobre as vendas com cartão de crédito, impedindo o bloqueio indevido de vendas e redução de conversão.",
+            linkText: "Saiba mais",
+            linkHref: "/comofunciona",
+          },
+          {
+            class: "service-block-4",
+            title: "Criação de ofertas por WhatsApp ",
+            description:
+              "Quer mais agilidade para vender? Na Lucre + você consegue gerar ofertas com novos preços conversando pelo WhatsApp com nossa IA de atendimento. Rápido, prático e eficiente para quem vende com processo comercial estruturado.",
+            linkText: "Saiba mais",
+            linkHref: "/comofunciona",
+          },
+        ]}
+      />
+      <img
+        src="/vectors/Vector5.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-5"
+      />
+      <img
+        src="/vectors/Vector6.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-6"
+      />
+    </section>
+    <CallToAction
+      subtitle="Pare de deixar dinheiro na mesa!"
+      title="Alavanque o seu negócio com as melhores taxas"
+      buttonText="Lucre mais agora"
+      contentAlignment="left"
+      backgroundImage="/image 36.webp"
+    />
+    <TestimonialsSection />
+    <section class="p0">
+      <IntegrationsSection />
+      <img
+        src="/vectors/Vector2.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-2"
+      />
+      <img
+        src="/vectors/Vector5.svg"
+        alt="Lucre+ Integrations"
+        class="vector vector-5--2"
+      />
+    </section>
+    <StandardCallToAction
+      title="Pronto para maximizar seus lucros?"
+      paragraph="Temos as melhores soluções para suas vendas via cartão de crédito."
+      buttonText="quero Lucrar mais agora"
+      showParagraph={true}
+    />
+    <img
+      src="/vectors/Vector1.svg"
+      alt="Lucre+ Integrations"
+      class="vector vector-1"
+    />
+  </main>
+</BaseLayout>
+
+<style>
+  /* Estilos da Seção Clientes */
+  .clientes-section {
+    display: none; /* Escondido por padrão */
+    padding: 0 var(--space-xxl);
+    text-align: center;
+    color: var(--color-button-text);
+  }
+
+  .client-logos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2em; /* Espaçamento entre os logos */
+  }
+
+  .client-logos-container img {
+    max-height: clamp(1em, 1.4cqw, 10em);
+    width: auto;
+    filter: grayscale(100%) brightness(200%); /* Para deixar os logos em tons de cinza/branco */
+    opacity: 0.7;
+    transition:
+      opacity 0.3s ease,
+      filter 0.3s ease;
+  }
+  .client-logos-container img:hover {
+    filter: grayscale(0%) brightness(100%); /* Colorido no hover */
+    opacity: 1;
+  }
+  .swiper-feature-blocks-section {
+    padding: 2cqw var(--space-xxl);
+  }
+  .vector-1 {
+    top: 11cqw;
+    left: -4cqw;
+    height: 10cqw;
+  }
+  .vector-1--2 {
+    top: 10cqw;
+    right: 3cqw;
+    height: 10cqw;
+    z-index: 1;
+  }
+  .vector-2 {
+    bottom: 15%;
+    left: 0;
+    height: 18cqw;
+  }
+  .vector-3 {
+    bottom: 5%;
+    right: 0;
+    height: 15cqw;
+  }
+  .vector-4 {
+    bottom: -25%;
+    left: 5%;
+    height: 7cqw;
+  }
+  .vector-5 {
+    bottom: 8%;
+    left: 43%;
+    height: 16cqw;
+  }
+  .vector-5--2 {
+    top: -80px;
+    right: -4%;
+    height: 16cqw;
+  }
+  .vector-6 {
+    bottom: -4%;
+    left: 0;
+    height: 12cqw;
+  }
+  @media (max-width: 960px) {
+    .swiper-feature-blocks-section {
+      padding: 2cqw 0;
+      max-height: clamp(5em, 60cqb, 40em);
+    }
+  }
+</style>
+<script is:inline>
+  function initializeModal() {
+    const formModal = document.getElementById("form-modal");
+    // Remova listeners anteriores para evitar duplicações se a função for chamada múltiplas vezes
+    document.querySelectorAll("button.primary").forEach((button) => {
+      // É uma boa prática remover o listener antes de adicionar para evitar múltiplos listeners
+      // se a função initializeModal for chamada mais de uma vez na mesma instância do botão.
+      // No entanto, para este caso específico com astro:page-load, ele lida com isso.
+      // Se houvessem múltiplas chamadas da função initializeModal sem uma navegação,
+      // essa parte seria mais crítica.
+      button.removeEventListener("click", handleButtonClick); // Certifique-se de que handleButtonClick esteja definido fora ou dentro
+      button.addEventListener("click", handleButtonClick);
+    });
+
+    function handleButtonClick(event) {
+      // Prevent opening the modal if the clicked button is inside the modal itself
+      if (formModal && !formModal.contains(event.target)) {
+        formModal.style.display = "flex";
+      }
+    }
+  }
+
+  // Adiciona o listener para o evento astro:page-load
+  document.addEventListener("astro:page-load", initializeModal);
+
+  // Opcional: Se você *não* estiver usando View Transitions, mantenha DOMContentLoaded
+  // Mas com View Transitions, astro:page-load é suficiente.
+  // document.addEventListener("DOMContentLoaded", initializeModal);
+</script>

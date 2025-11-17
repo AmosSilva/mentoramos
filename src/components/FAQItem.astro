@@ -1,0 +1,72 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<details class="faq-item">
+  <summary class="faq-question">
+    {question}
+    <svg
+      class="faq-arrow"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </summary>
+  <div class="faq-answer">
+    <p>{answer}</p>
+  </div>
+</details>
+
+<style>
+  .faq-item {
+    background-color: var(--color-background); /* Assuming a dark background */
+    color: var(--color-text); /* Adjust text color as needed */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light separator line */
+    padding: 1.5em 0;
+    margin-bottom: 0; /* Remove default margin */
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: max(1em, 1.2cqw);
+    font-weight: var(--font-weight-bold);
+    color: hsla(38, 70%, 95%, 1); /* Light text for questions */
+    padding-right: 1em; /* Space for the arrow */
+    list-style: none; /* Hide default arrow in Firefox */
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none; /* Hide default arrow in Webkit browsers */
+  }
+
+  .faq-arrow {
+    width: 1.5em;
+    height: 1.5em;
+    transition: transform 0.3s ease;
+    color: var(--color-link); /* Color for the arrow */
+  }
+
+  .faq-item[open] .faq-arrow {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding-top: 1em;
+    font-size: 1em;
+    line-height: 1.6;
+    color: var(--color-text); /* Adjust text color as needed */
+  }
+</style>

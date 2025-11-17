@@ -1,0 +1,379 @@
+---
+import { Image } from "astro:assets";
+
+interface HighlightItem {
+  title: string;
+  description: string;
+  imageSrc: ImageMetadata;
+}
+
+interface Props {
+  mainTitle?: string;
+  mainDescription?: string;
+  highlightItems?: HighlightItem[];
+}
+
+const defaultHighlightData: HighlightItem[] = [
+  {
+    title: "Área de membros",
+    description:
+      "Essas fontes equilibram modernidade, sofisticação e acessibilidade, reforçando o posicionamento premium.",
+    imageSrc: (await import("../../public/image 58.webp")).default, // Using the provided image for now
+  },
+  {
+    title: "Taxas Bacaniinhas",
+    description:
+      "Descrição para Taxas Bacaniinhas. Este texto será exibido ao passar o mouse sobre o item 2.",
+    imageSrc: (await import("../../public/image 36.webp")).default, // Placeholder image
+  },
+  {
+    title: "Plano Especial",
+    description:
+      "Descrição para Plano Especial. Este texto será exibido ao passar o mouse sobre o item 3.",
+    imageSrc: (await import("../../public/heroimage.webp")).default, // Placeholder image
+  },
+  {
+    title: "Comparativo",
+    description:
+      "Descrição para Comparativo. Este texto será exibido ao passar o mouse sobre o item 4.",
+    imageSrc: (await import("../../public/image 58.webp")).default, // Placeholder image
+  },
+  {
+    title: "Outro Item",
+    description:
+      "Descrição para Outro Item. Este texto será exibido ao passar o mouse sobre o item 5.",
+    imageSrc: (await import("../../public/image 36.webp")).default, // Placeholder image
+  },
+];
+
+const {
+  mainTitle,
+  mainDescription,
+  highlightItems = defaultHighlightData,
+} = Astro.props;
+
+const currentHighlightData = highlightItems;
+const initialImageSrc = currentHighlightData[0].imageSrc;
+const initialTitle = currentHighlightData[0].title;
+const initialDescription = currentHighlightData[0].description;
+---
+
+<div class="highlight-section">
+  <div class="highlight-content">
+    <div class="highlight-image-container">
+      <Image
+        src={initialImageSrc}
+        alt="Highlight Image"
+        class="highlight-image"
+      />
+      <div class="highlight-text-overlay">
+        <h3 class="highlight-overlay-title">{initialTitle}</h3>
+        <p class="highlight-overlay-description">{initialDescription}</p>
+      </div>
+    </div>
+    <div class="highlight-details">
+      {mainTitle && <h1 class="highlight-main-title">{mainTitle}</h1>}
+      {
+        mainDescription && (
+          <p class="highlight-main-description">{mainDescription}</p>
+        )
+      }
+      <ul class="highlight-list">
+        {
+          currentHighlightData.map((item, index) => (
+            <li data-index={index} class:list={{ active: index === 0 }}>
+              {item.title}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ currentHighlightData }}>
+  document.addEventListener("astro:after-swap", () => {
+    setupHighlightSection(currentHighlightData);
+  });
+
+  // Call setupHighlightSection on initial page load
+  setupHighlightSection(currentHighlightData);
+
+  function setupHighlightSection(highlightData) {
+    const listItems = document.querySelectorAll(".highlight-list li");
+
+    listItems.forEach((item) => {
+      item.addEventListener("mouseenter", (event) => {
+        const highlightImageContainer = document.querySelector(
+          ".highlight-image-container"
+        );
+        const highlightImage = document.querySelector(".highlight-image");
+        const highlightOverlayTitle = document.querySelector(
+          ".highlight-overlay-title"
+        );
+        const highlightOverlayDescription = document.querySelector(
+          ".highlight-overlay-description"
+        );
+        const highlightOverlayLink = document.querySelector(
+          ".highlight-overlay-link"
+        );
+
+        listItems.forEach((li) => li.classList.remove("active"));
+        event.target.classList.add("active");
+
+        const index = event.target.dataset.index;
+        if (index !== undefined) {
+          const data = highlightData[parseInt(index)];
+          if (data) {
+            if (highlightImage) highlightImage.src = data.imageSrc.src; // Access the actual URL from ImageMetadata
+            if (highlightOverlayTitle)
+              highlightOverlayTitle.textContent = data.title;
+            if (highlightOverlayDescription)
+              highlightOverlayDescription.textContent = data.description;
+            if (highlightOverlayLink) highlightOverlayLink.href = data.linkHref;
+            if (highlightOverlayLink)
+              highlightOverlayLink.textContent = data.linkText;
+            if (highlightImageContainer)
+              highlightImageContainer.classList.add("active-image");
+          }
+        }
+      });
+
+      item.addEventListener("mouseleave", () => {
+        // No need to remove active-image class on mouseleave from list item
+      });
+    });
+  }
+</script>
+
+<style>
+  .highlight-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: max(4em, 6cqw) var(--space-xxl);
+    color: var(--color-button-text);
+  }
+
+  .highlight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2cqw;
+  }
+
+  @media (min-width: 960px) {
+    .highlight-content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .highlight-image-container {
+    position: relative;
+    width: 100%;
+    height: 40cqh;
+    border-radius: clamp(1rem, 1.5cqw, 8rem);
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease; /* Add transition for shadow */
+  }
+
+  .highlight-image-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to top,
+      hsla(228, 12%, 6%, 1) 0%,
+      hsla(228, 12%, 10%, 0) 100%
+    );
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+  .highlight-image-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: clamp(
+      1rem,
+      1.5cqw,
+      8rem
+    ); /* Adjusted for HighlightSection */
+    padding: 0.1cqw; /* Thickness of the border */
+    background: linear-gradient(
+      45deg,
+      hsl(40, 59%, 27%) 0%,
+      hsl(40, 64%, 52%) 40%,
+      hsl(40, 68%, 69%) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 1; /* Hidden by default */
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Above the image, below the overlay */
+  }
+
+  .highlight-image-container.active-image {
+    box-shadow:
+      0 0 5cqw hsla(51, 100%, 50%, 0.05),
+      0 0 5cqw hsla(51, 100%, 50%, 0.08),
+      0 0.1cqw 0.5cqw hsl(0, 0%, 0%, 0.5),
+      inset 0 0 0.02cqw 0.1cqw hsla(51, 100%, 50%, 0.5);
+  }
+
+  @media (min-width: 960px) {
+    .highlight-image-container {
+      width: 50%; /* Adjust width for desktop */
+      height: 80cqh;
+      z-index: 1;
+    }
+  }
+
+  .highlight-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    object-position: 66% 0%;
+    border-radius: clamp(1rem, 1.5cqw, 8rem);
+  }
+
+  .highlight-text-overlay {
+    position: absolute;
+    width: 99.7%;
+    bottom: 0.1cqw;
+    left: 0.1cqw;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    padding: max(1rem, 2cqw);
+    color: white;
+    border-bottom-left-radius: clamp(1rem, 1.5cqw, 8rem);
+    border-bottom-right-radius: clamp(1rem, 1.5cqw, 8rem);
+    z-index: 2; /* Above the border */
+  }
+
+  .highlight-overlay-title {
+    font-size: max(1.5em, 2.5cqw);
+    margin-bottom: 0.5em;
+    color: hsla(38, 70%, 95%, 1);
+  }
+
+  .highlight-overlay-description {
+    font-size: clamp(1em, 1.3vw, 3rem);
+    line-height: 1.6;
+    margin-bottom: 1.5em;
+    font-weight: var(--font-weight-light);
+  }
+
+  .highlight-overlay-link {
+    font-size: max(0.7em, 0.7cqw);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-blue);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+
+  .highlight-overlay-link::after {
+    content: "→";
+    margin-left: 0.5em;
+    transition: transform 0.3s ease;
+  }
+
+  .highlight-overlay-link:hover {
+    color: var(--color-blue);
+  }
+
+  .highlight-overlay-link:hover::after {
+    transform: translateX(0.2em);
+  }
+
+  .highlight-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  @media (min-width: 960px) {
+    .highlight-details {
+      width: 45%; /* Adjust width for desktop */
+    }
+  }
+
+  .highlight-main-title {
+    font-size: max(2em, 3.5cqw);
+    color: hsla(38, 70%, 95%, 1);
+    margin-bottom: 0.5em;
+  }
+
+  .highlight-main-description {
+    font-size: max(0.9em, 1.4cqw);
+    line-height: 1.6;
+    margin-bottom: 1em;
+    font-weight: var(--font-weight-normal);
+  }
+
+  .highlight-list-title {
+    font-size: max(1em, 1.5cqw);
+    color: hsla(38, 70%, 95%, 1);
+    margin-top: 1em;
+    border-bottom: 1px solid hsla(38, 70%, 95%, 0.3);
+    padding-bottom: 0.5em;
+  }
+
+  .highlight-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .highlight-list li {
+    position: relative;
+    font-size: min(1.4em, 5cqw);
+    line-height: 1.8;
+    color: var(--color-link);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding-bottom: 0.2em;
+    width: max-content;
+    font-weight: 220;
+    color: hsl(0, 0%, 80%);
+  }
+
+  .highlight-list li::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0%;
+    width: 0;
+    height: 0.1cqw;
+    background-color: hsla(38, 70%, 62%, 1);
+    transition: width 0.3s ease;
+  }
+
+  .highlight-list li:hover,
+  .highlight-list li.active {
+    color: var(--color-blue); /* Hover effect for list items */
+  }
+
+  .highlight-list li:hover::before,
+  .highlight-list li.active::before {
+    width: 200%; /* Show the line on hover/active */
+  }
+</style>

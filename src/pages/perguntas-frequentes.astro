@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FAQSection from "../components/FAQSection.astro";
+import StandardCallToAction from "../components/StandardCallToAction.astro";
+---
+
+<BaseLayout
+  title="Perguntas Frequentes - Lucre+"
+  description="Encontre respostas para as perguntas mais comuns sobre a Lucre+. Se não encontrar o que procura, entre em contato conosco."
+>
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Lucre+",
+          "item": "https://lucre.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Perguntas Frequentes",
+          "item": "https://lucre.com/perguntas-frequentes"
+        }
+      ]
+    }
+  </script>
+  <main>
+    <FAQSection />
+    <StandardCallToAction
+      title="Pronto para maximizar seus lucros?"
+      buttonText="quero Lucrar mais agora"
+      showParagraph={false}
+    />
+  </main>
+</BaseLayout>

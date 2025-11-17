@@ -1,0 +1,90 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  imagePath: string;
+}
+
+const { title, description, imagePath } = Astro.props;
+---
+
+<section class="history-section">
+  <div class="history-content">
+    <h2>{title}</h2>
+    <div class="description-text" set:html={description} />
+  </div>
+  <div class="history-image-container">
+    <img src={imagePath} alt={title} />
+  </div>
+</section>
+
+<style>
+  .history-section {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    color: var(--color-button-text);
+    text-align: center;
+    overflow: hidden;
+    gap: 8cqb;
+  }
+
+  .history-content {
+    max-width: 100%;
+    margin-bottom: 2em;
+  }
+
+  .history-content h2 {
+    font-size: max(2em, 3.8cqw);
+    margin-bottom: 1.6cqw;
+    font-weight: var(--font-weight-bold);
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.2;
+  }
+
+  .history-content .description-text {
+    font-size: max(1.1em, 1.1cqw);
+    margin-bottom: 3cqw;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+
+  .history-image-container {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    border-radius: clamp(1rem, 1.5cqw, 8rem);
+  }
+
+  .history-image-container img {
+    width: inherit;
+    bottom: 0;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 960px) {
+    .history-section {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      text-align: left;
+      position: relative; /* Added for positioning context */
+    }
+
+    .history-content {
+      max-width: 45%; /* Adjusted max-width */
+      margin-bottom: 0;
+    }
+    .history-image-container {
+    width: 100%;
+    height: max(20em, 80cqh);
+    }
+    .history-image-container img {
+      height: inherit;
+      object-fit: cover;
+    }
+  }
+</style>

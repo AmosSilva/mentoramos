@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4285f4;
+      }
+
+      .cls-2 {
+        fill: #ea4335;
+      }
+
+      .cls-3 {
+        fill: #fbbc05;
+      }
+
+      .cls-4 {
+        fill: #34a853;
+      }
+
+      .cls-5 {
+        fill: #e0e0e0;
+      }
+    </style>
+  </defs>
+  <title>Google_2015_logo</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M1250,250c0-27.61-22.39-50-50-50H250c-27.61,0-50,22.39-50,50s22.39,50,50,50h950C1227.61,300,1250,277.61,1250,250Z"/>
+      <path class="cls-2" d="M1250,250c0-27.61-22.39-50-50-50H250c-27.61,0-50,22.39-50,50s22.39,50,50,50h950C1227.61,300,1250,277.61,1250,250Z"/>
+      <path class="cls-3" d="M1250,250c0-27.61-22.39-50-50-50H250c-27.61,0-50,22.39-50,50s22.39,50,50,50h950C1227.61,300,1250,277.61,1250,250Z"/>
+      <path class="cls-4" d="M1250,250c0-27.61-22.39-50-50-50H250c-27.61,0-50,22.39-50,50s22.39,50,50,50h950C1227.61,300,1250,277.61,1250,250Z"/>
+      <path class="cls-5" d="M1250,250c0-27.61-22.39-50-50-50H250c-27.61,0-50,22.39-50,50s22.39,50,50,50h950C1227.61,300,1250,277.61,1250,250Z"/>
+      <text transform="translate(199.99 300.01)" style="font-size:300px;font-family:GoogleSans-Bold, Google Sans;font-weight:700">
+        <tspan class="cls-1">G</tspan>
+        <tspan class="cls-2" x="200.01" y="0">o</tspan>
+        <tspan class="cls-3" x="400.01" y="0">o</tspan>
+        <tspan class="cls-1" x="600.01" y="0">g</tspan>
+        <tspan class="cls-4" x="800.01" y="0">l</tspan>
+        <tspan class="cls-2" x="950.01" y="0">e</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

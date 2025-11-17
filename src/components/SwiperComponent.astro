@@ -1,0 +1,181 @@
+---
+import FeatureBlock from "../components/FeatureBlock.astro";
+---
+
+<div id="swiper-container">
+  <!-- Additional required wrapper -->
+  <div class="blocks-container">
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/taxas.svg"
+        title="As melhores taxas e prazos"
+        linkHref="/comofunciona"
+        linkText="Saiba mais"
+      >
+        <div slot="description">
+          <p>
+            Temos as melhores taxas do mercado para recebimento em dois dias
+            úteis, trinta dias ou recebimento de uma parcela a cada mês.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/atendimento.svg"
+        title="Atendimento concierge"
+        linkHref="/comofunciona"
+        linkText="Saiba mais"
+      >
+        <div slot="description">
+          <p>
+            Aqui você tem acesso direto a um gerente de contas para todo o
+            suporte, incluindo a configuração de suas páginas de pagamento e
+            integrações.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/checkout.svg"
+        title="Checkout personalizado"
+        linkHref="/comofunciona"
+        linkText="Saiba mais"
+      >
+        <div slot="description">
+          <p>
+            Na Lucre + entregamos páginas de pagamento de alta conversão com a
+            identidade visual da sua empresa e de cada um dos produtos.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+    <div class="swiper-slide-placeholder">
+      <FeatureBlock
+        iconPath="/icons/integrações.svg"
+        title="Mais de 90 integrações"
+        linkHref="/comofunciona"
+        linkText="Saiba mais"
+      >
+        <div slot="description">
+          <p>
+            Temos integrações com áreas de membros, dados de conversão, sistemas
+            de automação, emissão de notas fiscais e muitas outras.
+          </p>
+        </div>
+      </FeatureBlock>
+    </div>
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+<style>
+  #swiper-container.swiper {
+    width: 100%;
+    max-height: clamp(5em, 60cqb, 40em);
+  }
+  .blocks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+    gap: 1.4cqw;
+    margin: 0 auto;
+  }
+  .swiper-pagination {
+    margin-top: 2rem;
+    position: relative;
+  }
+
+  @media (max-width: 960px) {
+    .swiper-slide {
+      width: 80%;
+      height: -webkit-fill-available;
+    }
+    .swiper-wrapper {
+      display: flex;
+    }
+    .blocks-container {
+      gap: 0;
+    }
+  }
+</style>
+<script>
+  import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  let swiperInstance = null;
+
+  function initializeSwiper() {
+    if (swiperInstance) return;
+
+    const swiperContainer = document.getElementById("swiper-container");
+    if (!swiperContainer) return;
+
+    const blocksContainer = swiperContainer.querySelector(".blocks-container");
+    const slides = swiperContainer.querySelectorAll(
+      ".swiper-slide-placeholder"
+    );
+
+    swiperContainer.classList.add("swiper");
+    blocksContainer.classList.add("swiper-wrapper");
+    slides.forEach((slide) => slide.classList.add("swiper-slide"));
+
+    swiperInstance = new Swiper(swiperContainer, {
+      modules: [Pagination],
+      direction: "horizontal",
+      loop: true,
+      slidesPerView: "auto",
+      spaceBetween: 10,
+      centeredSlides: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  }
+
+  function destroySwiper() {
+    if (!swiperInstance) return;
+
+    const swiperContainer = document.getElementById("swiper-container");
+    // Check if the container is still in the DOM before trying to modify it
+    if (swiperContainer) {
+      const blocksContainer =
+        swiperContainer.querySelector(".blocks-container");
+      const slides = swiperContainer.querySelectorAll(".swiper-slide");
+
+      swiperContainer.classList.remove("swiper");
+      if (blocksContainer) {
+        blocksContainer.classList.remove("swiper-wrapper");
+      }
+      if (slides) {
+        slides.forEach((slide) => slide.classList.remove("swiper-slide"));
+      }
+    }
+
+    swiperInstance.destroy(true, true);
+    swiperInstance = null;
+  }
+
+  function handleResize() {
+    // Ensure this runs only after the DOM is settled
+    requestAnimationFrame(() => {
+      if (window.innerWidth <= 960) {
+        initializeSwiper();
+      } else {
+        destroySwiper();
+      }
+    });
+  }
+
+  // Setup Swiper on new page load
+  document.addEventListener("astro:page-load", handleResize);
+
+  // Cleanup before swapping to a new page
+  document.addEventListener("astro:before-swap", destroySwiper);
+
+  // Also handle window resizing
+  window.addEventListener("resize", handleResize);
+</script>

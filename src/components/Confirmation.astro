@@ -1,0 +1,191 @@
+---
+
+---
+
+<div id="confirmation-screen" class="confirmation-screen">
+  <div class="confirmation-content">
+    <div class="checkmark-circle">
+      <svg
+        class="checkmark"
+        width="2091"
+        height="2109"
+        viewBox="0 0 2091 2109"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class="new-checkmark-path"
+          d="M1642.81 1877.29C1470.56 2016.58 1251.44 2100 1012.83 2100C458.427 2100 9.00075 1649.81 9 1094.48C9 880.942 75.5835 683.099 188.94 520.315C116.3 661.825 75.203 822.237 75.203 992.301C75.2034 1563.66 537.602 2026.85 1108 2026.85C1303.81 2026.85 1486.82 1972.14 1642.81 1877.29Z"
+          stroke="#95753E"
+          stroke-width="17"
+          stroke-linejoin="round"></path>
+        <path
+          class="new-checkmark-path"
+          d="M574.34 1241.71C574.355 1479.04 766.438 1671.43 1003.37 1671.43H1235.27C1472.19 1671.43 1664.26 1479.07 1664.31 1241.77L1665.25 1155.21V1155.07C1665.18 1147.34 1673.55 1142.51 1680.19 1146.42L1758.47 1192.61L1759.25 1193.05C1775.71 1202.02 1795.99 1190.12 1795.99 1171.14V1008.35C1795.98 1000.18 1791.98 992.534 1785.29 987.876L1557.12 829.229L1556.31 828.693C1547.89 823.301 1537 823.481 1528.74 829.229V829.233L1300.57 987.879C1293.87 992.537 1289.88 1000.18 1289.88 1008.35V1171.14C1289.88 1190.43 1310.8 1202.4 1327.39 1192.61L1409 1147.5C1415.62 1143.6 1420.24 1147.51 1420.24 1155.2V1241.69C1420.24 1344.02 1337.42 1426.97 1235.27 1426.97H1003.37C901.389 1426.97 818.397 1343.84 818.397 1241.69V1241.66L815.378 1032.26L816.888 835.066L815.378 428.473C815.243 393.743 787.1 365.665 752.435 365.665H634.259C599.399 365.665 571.193 394.039 571.313 428.937L574.34 1241.71Z"
+          stroke="#95753E"
+          stroke-width="17"
+          stroke-linejoin="round"></path>
+        <path
+          class="new-checkmark-path"
+          d="M2082.4 977.301C2082.4 1512.09 1649.59 1945.61 1115.7 1945.61C581.811 1945.61 149.001 1512.09 149 977.301C149 442.521 581.811 9.00071 1115.7 9C1649.59 9 2082.4 442.521 2082.4 977.301Z"
+          stroke="#95753E"
+          stroke-width="17"
+          stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <h2>Formulário Enviado com Sucesso!</h2>
+    <p>Agradecemos o seu contato. Em breve entraremos em contato com você.</p>
+    <p>
+      Se precisar de ajuda imediata, clique no botão abaixo para falar conosco
+      pelo WhatsApp:
+    </p>
+    <div class="links">
+      <button id="closeConfirmationButton" type="button" class="close-button">
+        Retornar à página
+      </button>
+      <a
+        href="https://wa.me/5512983010571"
+        target="_blank"
+        class="whatsapp-button"
+      >
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .confirmation-screen {
+    display: none; /* Hidden by default */
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001; /* Higher than form modal */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
+    backdrop-filter: blur(5px); /* Optional: blur background */
+  }
+
+  .confirmation-content {
+    background-color: var(--color-background);
+    margin: auto;
+    padding: var(--space-m);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    color: var(--color-text);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50px);
+    opacity: 0;
+    animation: fadeInSlideUp 0.5s forwards ease-out;
+  }
+
+  @keyframes fadeInSlideUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .confirmation-content h2 {
+    margin-bottom: var(--space-xs);
+  }
+
+  .confirmation-content p {
+    font-size: max(1em, 1.2cqw);
+    margin-bottom: var(--space-xs);
+    line-height: 1.5;
+  }
+
+  .checkmark-circle {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: 150px; /* Ajuste o tamanho conforme necessário */
+    position: relative;
+    margin: 0 auto var(--space-m) auto;
+    border-radius: 50%;
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkmark {
+    width: 100%;
+    height: 100%;
+    display: block;
+    animation: scale 0.3s ease-in-out 0.9s both;
+  }
+
+  .new-checkmark-path {
+    stroke-dasharray: 10000; /* Valor grande para cobrir todos os paths */
+    stroke-dashoffset: 10000;
+    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes scale {
+    0%,
+    100% {
+      transform: none;
+    }
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+  .links {
+    display: flex;
+    justify-content: space-around;
+    gap: 2cqb;
+    margin-top: 4cqb;
+  }
+  .close-button {
+    font-size: small;
+    padding: 0.6rem 1rem;
+    border: 0.41cqb solid hsl(0, 0%, 100%, 0.1);
+    border-radius: 1.4cqb;
+    display: inline-block;
+    background: linear-gradient(
+      90deg,
+      var(--color-button-primary-start) 41.04%,
+      var(--color-button-primary-end) 77.78%
+    );
+    color: white;
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: background-color 0.3s ease;
+  }
+
+  .whatsapp-button {
+    font-size: small;
+    padding: 0.6rem 1rem;
+    border: 0.41cqb solid hsl(0, 0%, 100%, 0.1);
+    border-radius: 1.4cqb;
+    display: inline-block;
+    background: var(--color-button-secondary);
+    color: white;
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: background-color 0.3s ease;
+  }
+
+  .whatsapp-button:hover {
+    background-color: var(--color-green);
+  }
+
+  @media (max-width: 600px) {
+    .links {
+      flex-direction: column;
+    }
+  }
+</style>

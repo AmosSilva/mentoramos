@@ -36,80 +36,17 @@ import FormLanding from "../components/FormLanding.astro";
   <main>
 
     <section class="landing-hero-section">
-      <h1>Descubra como passar em Medicina em menos de um ano</h1>
+      <h1><p> </p>Descubra como passar em Medicina em menos de um ano</h1>
       <!-- VIDEO PLACEHOLDER REMOVED -->
     <vturb-smartplayer id="vid-691a5238a9e1550a6578cb1d" style="display: block; margin: 0 auto; width: 60%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/f1156368-e642-4c69-b1bf-86397559d97d/players/691a5238a9e1550a6578cb1d/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
     </section>
 
-    <style>.esconder { display: none }</style>
-    <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-    /* ALTERE O VALOR 10 PARA OS SEGUNDOS EM QUE AS SEÇÕES VÃO APARECER */
-        var SECONDS_TO_DISPLAY = 10;
-        var CLASS_TO_DISPLAY = ".esconder";
-    /* DAQUI PARA BAIXO NAO PRECISA ALTERAR */
-        var EXPIRATION_DAYS = 14;
-        var alreadyDisplayedKey = "alreadyElsDisplayed" + SECONDS_TO_DISPLAY;
-        var elsHidden = document.querySelectorAll(CLASS_TO_DISPLAY);
-        var elsDisplayed = false;
-        var attempts = 0;
-
-        class StorageHandler {
-            static expiryTime = EXPIRATION_DAYS * 86400000;
-
-            static set(key, value) {
-                localStorage.setItem(
-                    key,
-                    JSON.stringify({ value, expiry: Date.now() + this.expiryTime })
-                );
-            }
-
-            static get(key) {
-                var item = localStorage.getItem(key);
-                if (!item) return null;
-
-                var { value, expiry } = JSON.parse(item);
-                if (Date.now() > expiry) {
-                    localStorage.removeItem(key);
-                    return null;
-                }
-                return value;
-            }
-        }
-
-        var alreadyElsDisplayed = StorageHandler.get(alreadyDisplayedKey);
-
-        var showHiddenElements = function () {
-            elsDisplayed = true;
-            elsHidden.forEach((e) => e.style.display = "block");
-            StorageHandler.set(alreadyDisplayedKey, true);
-        };
-
-        var startWatchVideoProgress = function () {
-            if (typeof smartplayer === 'undefined' || !(smartplayer.instances && smartplayer.instances.length)) {
-                if (attempts >= 10) return;
-                attempts++;
-                return setTimeout(startWatchVideoProgress, 1000);
-            }
-            smartplayer.instances[0].on('timeupdate', () => {
-                if (elsDisplayed || smartplayer.instances[0].smartAutoPlay) return;
-                if (smartplayer.instances[0].video.currentTime < SECONDS_TO_DISPLAY) return;
-                showHiddenElements();
-            });
-        };
-
-        if (alreadyElsDisplayed) {
-            setTimeout(showHiddenElements, 100);
-        } else {
-            startWatchVideoProgress();
-        }
-    });
-    </script>
+    
 
     <!-- VSL CONTENT IS NOW VISIBLE BY DEFAULT -->
     <div id="vsl-content"> 
 
-    <div class="esconder">
+    
     
       <div class="button">
         <button class="primary">Quero Aumentar Meus Lucros Agora!</button>
@@ -203,7 +140,7 @@ import FormLanding from "../components/FormLanding.astro";
       </footer>
       <FormLanding />
     </div> 
-    </div>
+    
   </main>
 </LandingPageLayout>
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPS ITA - Sua Aprovação no ITA Começa Aqui</title>
+    <meta
+      name="description"
+      content="Mentoria completa para vestibulandos do ITA. Saiba o que é, para quem é, e como podemos te ajudar a conquistar sua vaga."
+    />
+    <meta
+      name="keywords"
+      content="ITA, vestibular, mentoria, aprovação, engenharia, estudos, GPS ITA"
+    />
+    <meta name="author" content="GPS ITA" />
+    <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+            "2xl": "1536px",
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        font-size: 14px;
+        background-color: #001e33;
+        /* Camada 1: Gradiente escuro semi-transparente para legibilidade */
+        /* Camada 2: Sua imagem de fundo. Adicione o arquivo 'background.jpg' na pasta principal. */
+        background-image: linear-gradient(to bottom, #132139, #03283a),
+        url("/background.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 100vh;
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        /* Padrão SVG repetido no BODY */
+        font-family: "Inter", sans-serif;
+        background-image: url("/src/assets/images/elementosdofundo.svg");
+        /* Usando o caminho completo */
+        background-repeat: repeat;
+        background-color: transparent;
+        min-height: 100vh;
+        background-position: top;
+      }
+
+      h1,
+      h2,
+      h3,
+      .font-manrope {
+        font-family: "Manrope", sans-serif;
+      }
+
+      @media (min-width: 1536px) {
+        html {
+          font-size: 16px;
+        }
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+          "react/": "https://aistudiocdn.com/react@^19.2.0/",
+          "react": "https://aistudiocdn.com/react@^19.2.0"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

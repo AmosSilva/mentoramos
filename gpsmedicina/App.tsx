@@ -1,0 +1,70 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Features from './components/Features';
+import Methodology from './components/Methodology';
+import Testimonials from './components/Testimonials';
+import AboutCreator from './components/AboutCreator';
+import ContactForm from './components/ContactForm';
+import VideoTestimonials from './components/VideoTestimonials';
+import FAQ from './components/FAQ';
+import Footer from './components/Footer';
+
+const App: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+  const [showPageContent, setShowPageContent] = useState(false);
+
+  useEffect(() => {
+    const hasSeenVSL = localStorage.getItem('hasSeenVSL');
+
+    if (hasSeenVSL === 'true') {
+      setShowPageContent(true);
+      document.body.style.overflow = 'auto';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+    
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  
+  const handleShowPageContent = useCallback(() => {
+    localStorage.setItem('hasSeenVSL', 'true');
+    setShowPageContent(true);
+    document.body.style.overflow = 'auto';
+  }, []);
+
+  return (
+    <div className="text-white overflow-x-hidden">
+      <Header isLoading={!showPageContent} />
+      <main>
+        <Hero 
+          isLoading={loading} 
+          onShowPageContent={handleShowPageContent}
+          isRevealed={showPageContent}
+        />
+        {!loading && (
+          <div className={`transition-opacity duration-1000 ${showPageContent ? 'opacity-100' : 'opacity-0'}`}>
+              <Features />
+              <Methodology />
+              <VideoTestimonials />
+              <AboutCreator />
+              <Testimonials />
+              <ContactForm />
+              <FAQ />
+          </div>
+        )}
+      </main>
+      {!loading && (
+        <div className={`transition-opacity duration-1000 ${showPageContent ? 'opacity-100' : 'opacity-0'}`}>
+          <Footer />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;

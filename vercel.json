@@ -1,11 +1,5 @@
 {
-  "build": {
-    "env": {
-      "VERCEL_BUILD_COMMAND": "echo 'No build needed'"
-    },
-    "command": "echo 'No build needed'",
-    "outputDirectory": "public"
-  },
+  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/gpsita/:match*",

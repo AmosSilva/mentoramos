@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/gpsita/:match*",
-      "destination": "https://mentoramos-gpsita.vercel.app/gpsita/:match*"
+      "destination": "https://mentoramos-gpsita.vercel.app/:match*"
     },
     {
       "source": "/gpsmedicina/:match*",
-      "destination": "https://mentoramos-gpsmedicina.vercel.app/gpsmedicina/:match*"
+      "destination": "https://mentoramos-gpsmedicina.vercel.app/:match*"
     }
   ]
 }

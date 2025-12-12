@@ -6,12 +6,20 @@
       "destination": "https://mentoramos-gpsita.vercel.app/"
     },
     {
+      "source": "/gpsita/assets/:match*",
+      "destination": "https://mentoramos-gpsita.vercel.app/assets/:match*"
+    },
+    {
       "source": "/gpsita/:match*",
       "destination": "https://mentoramos-gpsita.vercel.app/:match*"
     },
     {
       "source": "/gpsmedicina",
       "destination": "https://mentoramos-gpsmedicina.vercel.app/"
+    },
+    {
+      "source": "/gpsmedicina/assets/:match*",
+      "destination": "https://mentoramos-gpsmedicina.vercel.app/assets/:match*"
     },
     {
       "source": "/gpsmedicina/:match*",

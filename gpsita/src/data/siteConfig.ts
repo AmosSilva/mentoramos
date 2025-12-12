@@ -15,5 +15,5 @@ export const siteConfig = {
   vturbVideoId: '691a5238a9e1550a6578cb1d',
 
   // Defina em SEGUNDOS quando o botão de CTA deve aparecer (ex: 300 para 5 minutos)
-  ctaDelaySeconds: 200,
+  ctaDelaySeconds: 20,
 };

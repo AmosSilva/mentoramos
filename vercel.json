@@ -2,8 +2,16 @@
   "outputDirectory": "public",
   "rewrites": [
     {
+      "source": "/gpsita",
+      "destination": "https://mentoramos-gpsita.vercel.app/"
+    },
+    {
       "source": "/gpsita/:match*",
       "destination": "https://mentoramos-gpsita.vercel.app/:match*"
+    },
+    {
+      "source": "/gpsmedicina",
+      "destination": "https://mentoramos-gpsmedicina.vercel.app/"
     },
     {
       "source": "/gpsmedicina/:match*",

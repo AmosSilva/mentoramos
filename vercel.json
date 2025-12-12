@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/gpsita/:match*",
+      "destination": "https://url-do-projeto-gpsita.vercel.app/:match*"
+    },
+    {
+      "source": "/gpsmedicina/:match*",
+      "destination": "https://url-do-projeto-gpsmedicina.vercel.app/:match*"
+    }
+  ]
+}

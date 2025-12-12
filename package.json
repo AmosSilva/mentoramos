@@ -1,0 +1,8 @@
+{
+  "name": "mentoramos-root",
+  "version": "1.0.0",
+  "description": "Root package for monorepo rewrites.",
+  "scripts": {
+    "build": "echo 'No build needed for root directory'"
+  }
+}

@@ -16,17 +16,20 @@ const App: React.FC = () => {
   const [showPageContent, setShowPageContent] = useState(false);
 
   useEffect(() => {
-    const hasSeenVSL = localStorage.getItem('hasSeenVSL');
+    // Lógica VSL desativada para diagnóstico
+    // const hasSeenVSL = localStorage.getItem('hasSeenVSL');
 
-    if (hasSeenVSL === 'true') {
-      // Se o usuário já viu, mostra o conteúdo e ativa a rolagem imediatamente.
-      setShowPageContent(true);
-      document.body.style.overflow = 'auto';
-    } else {
-      // Se for a primeira vez, esconde a rolagem.
-      document.body.style.overflow = 'hidden';
-    }
+    // if (hasSeenVSL === 'true') {
+    //   setShowPageContent(true);
+    //   document.body.style.overflow = 'auto';
+    // } else {
+    //   document.body.style.overflow = 'hidden';
+    // }
     
+    // Forçando a exibição do conteúdo após o carregamento inicial
+    document.body.style.overflow = 'auto';
+    setShowPageContent(true);
+
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -36,9 +39,9 @@ const App: React.FC = () => {
   
   const handleShowPageContent = useCallback(() => {
     // Salva a "marcação" no navegador e mostra o conteúdo.
-    localStorage.setItem('hasSeenVSL', 'true');
-    setShowPageContent(true);
-    document.body.style.overflow = 'auto';
+    // localStorage.setItem('hasSeenVSL', 'true');
+    // setShowPageContent(true);
+    // document.body.style.overflow = 'auto';
   }, []);
 
   return (

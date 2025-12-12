@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/gpsita/:match*",
-      "destination": "https://url-do-projeto-gpsita.vercel.app/:match*"
+      "destination": "https://mentoramos-gpsita.vercel.app/gpsita/:match*"
     },
     {
       "source": "/gpsmedicina/:match*",
-      "destination": "https://url-do-projeto-gpsmedicina.vercel.app/:match*"
+      "destination": "https://mentoramos-gpsmedicina.vercel.app/gpsmedicina/:match*"
     }
   ]
 }
